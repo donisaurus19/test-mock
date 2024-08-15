@@ -17,7 +17,9 @@ const TodoList = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    Android.contentHeight(document.documentElement.offsetHeight);
+    window.addEventListener("flutterInAppWebViewPlatformReady", function() {
+      window.flutter_inappwebview.callHandler('Properties', ['height', document.documentElement.offsetHeight]);
+    });
   }, [isVisible]);
 
   const toggleTodo = (id) => {
