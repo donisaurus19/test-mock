@@ -17,7 +17,7 @@ const TodoList = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    Properties.contentHeight(document.documentElement.offsetHeight);
+    Android.contentHeight(document.documentElement.offsetHeight);
   }, [isVisible]);
 
   const toggleTodo = (id) => {
