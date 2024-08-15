@@ -14,10 +14,10 @@ const TodoList = () => {
 
   ]);
 
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    console.log('current offsetHeight',document.documentElement.offsetHeight)
+    Properties.contentHeight(document.documentElement.offsetHeight);
   }, [isVisible]);
 
   const toggleTodo = (id) => {
@@ -29,7 +29,7 @@ const TodoList = () => {
   };
 
   return (
-    <div className="p-4">
+    <div id="methodWrapper" className="p-4">
       <button
         onClick={() => setIsVisible(!isVisible)}
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
