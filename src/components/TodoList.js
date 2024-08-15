@@ -7,6 +7,11 @@ const TodoList = () => {
     { id: 1, text: 'Wallet', completed: false },
     { id: 2, text: 'Paylater', completed: false },
     { id: 3, text: 'Pinjam Teman', completed: false },
+    { id: 4, text: 'Pinjam Teman A', completed: false },
+    { id: 5, text: 'Pinjam Teman B', completed: false },
+    { id: 6, text: 'Pinjam Teman C', completed: false },
+    { id: 7, text: 'Pinjam Teman D', completed: false },
+
   ]);
 
   const [isVisible, setIsVisible] = useState(false);
@@ -14,7 +19,7 @@ const TodoList = () => {
   useEffect(() => {
     console.log('current offsetHeight',document.documentElement.offsetHeight)
   }, [isVisible]);
-  
+
   const toggleTodo = (id) => {
     setTodos(
       todos.map(todo =>
