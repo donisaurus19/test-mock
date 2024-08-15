@@ -11,6 +11,10 @@ const TodoList = () => {
 
   const [isVisible, setIsVisible] = useState(false);
 
+  useEffect(() => {
+    console.log('current offsetHeight',document.documentElement.offsetHeight)
+  }, [isVisible]);
+  
   const toggleTodo = (id) => {
     setTodos(
       todos.map(todo =>
