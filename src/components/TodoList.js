@@ -20,12 +20,16 @@ const TodoList = () => {
   
   const updateHeight = () => {
     window?.flutter_inappwebview?.callHandler('Properties').then(res => {
-      setPaymentData(JSON.stringify(res));
+      setPaymentData(JSON.parse(JSON.stringify(res)));
     })
   };
 
+  const submitHandler = () => {
+    window?.flutter_inappwebview?.callHandler('Submitted', true);
+  }
+
   const handleEvent = () => {
-    setFlutterInAppWebViewReady(true)
+    setFlutterInAppWebViewReady(true);
     updateHeight();
   }
   useEffect(() => {
@@ -37,9 +41,6 @@ const TodoList = () => {
       });
     };
   }, []);
-
-  console.log(paymentData);
-  console.log(JSON.stringify(paymentData));
 
   // useEffect(() => {
   //   window?.flutter_inappwebview?.callHandler('Properties').then(res => {
@@ -84,6 +85,7 @@ const TodoList = () => {
 
       <button
         className="mb-4 mt-6 px-4 py-2 bg-purple-500 text-white rounded"
+        onClick={submitHandler}
       >
         Bayar
       </button>
