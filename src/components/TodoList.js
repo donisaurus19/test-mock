@@ -18,10 +18,18 @@ const TodoList = () => {
   const [isFlutterInAppWebViewReady, setFlutterInAppWebViewReady] = useState(false);
   const [paymentData, setPaymentData] = useState();
   
+  const updateHeight = () => {
+    window?.flutter_inappwebview?.callHandler('Properties').then(res => {
+      setPaymentData(res);
+    })
+  };
+
+  const handleEvent = () => {
+    setFlutterInAppWebViewReady(true)
+    updateHeight();
+  }
   useEffect(() => {
-    window?.addEventListener("flutterInAppWebViewPlatformReady", () => {
-      setFlutterInAppWebViewReady(true);
-    });
+    window?.addEventListener("flutterInAppWebViewPlatformReady", handleEvent);
     
     return () => {
       window?.removeEventListener("flutterInAppWebViewPlatformReady", () => {
@@ -30,11 +38,11 @@ const TodoList = () => {
     };
   }, []);
 
-  useEffect(() => {
-    window?.flutter_inappwebview?.callHandler('Properties').then(res => {
-      setPaymentData(res);
-    })
-  }, [isFlutterInAppWebViewReady]);
+  // useEffect(() => {
+  //   window?.flutter_inappwebview?.callHandler('Properties').then(res => {
+  //     setPaymentData(res);
+  //   })
+  // }, [isFlutterInAppWebViewReady]);
 
   const toggleTodo = (id) => {
     setTodos(
