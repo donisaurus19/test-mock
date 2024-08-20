@@ -84,7 +84,7 @@ const TodoList = () => {
       >
         Bayar
       </button>
-      {`${paymentData ? paymentData : ''}`}
+      {`${paymentData ? JSON.parse(paymentData) : ''}`}
     </div>
   );
 };
