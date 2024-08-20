@@ -20,7 +20,7 @@ const TodoList = () => {
   
   const updateHeight = () => {
     window?.flutter_inappwebview?.callHandler('Properties').then(res => {
-      setPaymentData(res);
+      setPaymentData(JSON.stringify(res));
     })
   };
 
@@ -87,6 +87,7 @@ const TodoList = () => {
       >
         Bayar
       </button>
+      <div>{paymentData}</div>
     </div>
   );
 };
