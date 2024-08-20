@@ -38,6 +38,9 @@ const TodoList = () => {
     };
   }, []);
 
+  console.log(paymentData);
+  console.log(JSON.stringify(paymentData));
+
   // useEffect(() => {
   //   window?.flutter_inappwebview?.callHandler('Properties').then(res => {
   //     setPaymentData(res);
@@ -84,7 +87,6 @@ const TodoList = () => {
       >
         Bayar
       </button>
-      {`${paymentData ? JSON.parse(paymentData) : ''}`}
     </div>
   );
 };
