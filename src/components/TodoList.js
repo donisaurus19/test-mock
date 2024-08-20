@@ -14,17 +14,27 @@ const TodoList = () => {
 
   ]);
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isFlutterInAppWebViewReady, setFlutterInAppWebViewReady] = useState(false);
+  const [paymentData, setPaymentData] = useState();
+  
+  useEffect(() => {
+    window?.addEventListener("flutterInAppWebViewPlatformReady", () => {
+      setFlutterInAppWebViewReady(true);
+    });
+    
+    return () => {
+      window?.removeEventListener("flutterInAppWebViewPlatformReady", () => {
+        setFlutterInAppWebViewReady(false);
+      });
+    };
+  }, []);
 
   useEffect(() => {
-    const updateHeight = () => {
-      window.flutter_inappwebview.callHandler('Properties', ['height', document.documentElement.offsetHeight]);
-    };
-  
-    window.addEventListener("flutterInAppWebViewPlatformReady", updateHeight);
-  
-    updateHeight();
-  }, [isVisible]);
+    window?.flutter_inappwebview?.callHandler('Properties').then(res => {
+      setPaymentData(res);
+    })
+  }, [isFlutterInAppWebViewReady]);
 
   const toggleTodo = (id) => {
     setTodos(
@@ -35,7 +45,7 @@ const TodoList = () => {
   };
 
   return (
-    <div id="methodWrapper" className="p-4">
+    <div id="methodWrapper" className="p-4 flex flex-col">
       <button
         onClick={() => setIsVisible(!isVisible)}
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
@@ -60,6 +70,13 @@ const TodoList = () => {
           ))}
         </ul>
       )}
+
+      <button
+        className="mb-4 mt-6 px-4 py-2 bg-purple-500 text-white rounded"
+      >
+        Bayar
+      </button>
+      {`${paymentData ? paymentData : ''}`}
     </div>
   );
 };
