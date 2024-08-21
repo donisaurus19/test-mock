@@ -125,7 +125,12 @@ export default function Home() {
     <div>
       <h1>WebView Example</h1>
       <p>This is a sample page to demonstrate WebView communication.</p>
-      <button onClick={handleButtonClick}>Send Modified Data to Flutter</button>
+      <button
+        className="mb-4 mt-6 px-4 py-2 bg-purple-500 text-white rounded"
+        onClick={handleButtonClick}
+      >
+        Send Modified Data to Flutter
+      </button>
       {approvalStatus && <p>Data approval status: {approvalStatus}</p>}
     </div>
   );
