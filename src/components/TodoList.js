@@ -32,6 +32,11 @@ const TodoList = () => {
           setFlutterInAppWebViewReady(true);
         });
     });
+
+    window?.readFromFlutter = (event) => {
+      console.log(event?.data);
+      setFlutterData(event);
+    };
     
     return () => {
       window?.removeEventListener("flutterInAppWebViewPlatformReady", () => {
@@ -47,11 +52,6 @@ const TodoList = () => {
       )
     );
   };
-
-  const readFromFlutter = (event) => {
-    console.log(event?.data);
-    setFlutterData(event);
-  }
 
   return (
     <div id="methodWrapper" className="p-4 flex flex-col">
