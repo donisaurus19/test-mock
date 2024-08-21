@@ -11,32 +11,26 @@ const TodoList = () => {
     { id: 5, text: 'Pinjam Teman B', completed: false },
     { id: 6, text: 'Pinjam Teman C', completed: false },
     { id: 7, text: 'Pinjam Teman D', completed: false },
-
   ]);
 
   const [isVisible, setIsVisible] = useState(false);
   const [isFlutterInAppWebViewReady, setFlutterInAppWebViewReady] = useState(false);
   const [paymentData, setPaymentData] = useState();
-  const [textBtn, setTextBtn] = useState('Bayar');
+  const [isLunas, setLunas] = useState(false);
   
-  const updateHeight = () => {
-    window?.flutter_inappwebview?.callHandler('Properties').then(res => {
-      setPaymentData(JSON.parse(JSON.stringify(res)));
-    })
-  };
-
   const submitHandler = () => {
-    window?.flutter_inappwebview?.callHandler('Submitted', true);
-    setTextBtn('Lunas');
+    if(isFlutterInAppWebViewReady) window?.flutter_inappwebview?.callHandler('Submitted', {...paymentData, lunas: true});
+    setLunas(prevState => !prevState);
   }
 
-  const handleEvent = () => {
-    setFlutterInAppWebViewReady(true);
-    updateHeight();
-    submitHandler();
-  }
   useEffect(() => {
-    window?.addEventListener("flutterInAppWebViewPlatformReady", handleEvent);
+    window?.addEventListener("flutterInAppWebViewPlatformReady", () => {
+      window?.flutter_inappwebview?.callHandler('Submitted')
+        .then((result) => {
+          setPaymentData(JSON.stringify(result));
+          setFlutterInAppWebViewReady(true);
+        });
+    });
     
     return () => {
       window?.removeEventListener("flutterInAppWebViewPlatformReady", () => {
@@ -45,12 +39,6 @@ const TodoList = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   window?.flutter_inappwebview?.callHandler('Properties').then(res => {
-  //     setPaymentData(res);
-  //   })
-  // }, [isFlutterInAppWebViewReady]);
-
   const toggleTodo = (id) => {
     setTodos(
       todos.map(todo =>
@@ -58,6 +46,10 @@ const TodoList = () => {
       )
     );
   };
+
+  const handleSubmit1 = () => {
+    window?.flutter_inappwebview?.callHandler('Submitted', true);
+  }
 
   return (
     <div id="methodWrapper" className="p-4 flex flex-col">
@@ -88,9 +80,9 @@ const TodoList = () => {
 
       <button
         className="mb-4 mt-6 px-4 py-2 bg-purple-500 text-white rounded"
-        onClick={submitHandler}
+        onClick={handleSubmit1}
       >
-        {textBtn}
+        {isLunas ? 'Lunas' : 'Bayar'}
       </button>
       <div>{paymentData}</div>
     </div>
