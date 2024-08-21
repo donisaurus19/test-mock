@@ -33,7 +33,7 @@ const TodoList = () => {
         });
     });
 
-    window?.readFromFlutter = (event) => {
+    window.readFromFlutter = function(event) {
       console.log(event?.data);
       setFlutterData(event);
     };
