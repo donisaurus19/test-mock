@@ -18,37 +18,46 @@ const TodoList = () => {
   const [paymentData, setPaymentData] = useState();
   const [isLunas, setLunas] = useState(false);
   
-  const submitHandler = () => {
-    if(isFlutterInAppWebViewReady) window?.flutter_inappwebview?.callHandler('Submitted', {...paymentData, lunas: true});
-    setLunas(prevState => !prevState);
+  // const submitHandler = () => {
+  //   if(isFlutterInAppWebViewReady) window?.flutter_inappwebview?.callHandler('Submitted', {...paymentData, lunas: true});
+  //   setLunas(prevState => !prevState);
+  // }
+
+  // useEffect(() => {
+  //   window?.addEventListener("flutterInAppWebViewPlatformReady", () => {
+  //     window?.flutter_inappwebview?.callHandler('Submitted')
+  //       .then((result) => {
+  //         setPaymentData(JSON.stringify(result));
+  //         setFlutterInAppWebViewReady(true);
+  //       });
+  //   });
+    
+  //   return () => {
+  //     window?.removeEventListener("flutterInAppWebViewPlatformReady", () => {
+  //       setFlutterInAppWebViewReady(false);
+  //     });
+  //   };
+  // }, []);
+
+  // const toggleTodo = (id) => {
+  //   setTodos(
+  //     todos.map(todo =>
+  //       todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  //     )
+  //   );
+  // };
+
+  // useEffect(() => {
+    
+  // }, [])
+
+  myObject?.onmessage = (event) => {
+    setPaymentData(event?.data);
+    console.log(event?.data)
   }
 
-  useEffect(() => {
-    window?.addEventListener("flutterInAppWebViewPlatformReady", () => {
-      window?.flutter_inappwebview?.callHandler('Submitted')
-        .then((result) => {
-          setPaymentData(JSON.stringify(result));
-          setFlutterInAppWebViewReady(true);
-        });
-    });
-    
-    return () => {
-      window?.removeEventListener("flutterInAppWebViewPlatformReady", () => {
-        setFlutterInAppWebViewReady(false);
-      });
-    };
-  }, []);
-
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
   const handleSubmit1 = () => {
-    window?.flutter_inappwebview?.callHandler('Submitted', true);
+    myObject?.postMessage('AAWWWWWWWW!!!!!');
   }
 
   return (
@@ -84,7 +93,7 @@ const TodoList = () => {
       >
         {isLunas ? 'Lunas' : 'Bayar'}
       </button>
-      <div>{paymentData}</div>
+      <div className="mb-4 mt-6 px-4 py-2 rounded">{paymentData}</div>
     </div>
   );
 };
