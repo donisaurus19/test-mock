@@ -17,6 +17,7 @@ const TodoList = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isFlutterInAppWebViewReady, setFlutterInAppWebViewReady] = useState(false);
   const [paymentData, setPaymentData] = useState();
+  const [textBtn, setTextBtn] = useState('Bayar');
   
   const updateHeight = () => {
     window?.flutter_inappwebview?.callHandler('Properties').then(res => {
@@ -26,11 +27,13 @@ const TodoList = () => {
 
   const submitHandler = () => {
     window?.flutter_inappwebview?.callHandler('Submitted', true);
+    setTextBtn('Lunas');
   }
 
   const handleEvent = () => {
     setFlutterInAppWebViewReady(true);
     updateHeight();
+    submitHandler();
   }
   useEffect(() => {
     window?.addEventListener("flutterInAppWebViewPlatformReady", handleEvent);
@@ -87,7 +90,7 @@ const TodoList = () => {
         className="mb-4 mt-6 px-4 py-2 bg-purple-500 text-white rounded"
         onClick={submitHandler}
       >
-        Bayar
+        {textBtn}
       </button>
       <div>{paymentData}</div>
     </div>
