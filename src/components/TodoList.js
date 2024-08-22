@@ -64,7 +64,7 @@ const TodoList = () => {
   // };
 
   return (
-    <div id="methodWrapper" className="p-4 flex flex-col">
+    <div id="methodWrapper" className="flex flex-col">
       <div>Poket</div>
       <button
         className="mb-4 mt-6 px-4 py-2 bg-purple-500 rounded"
@@ -80,8 +80,6 @@ const TodoList = () => {
           </div>
         ) : `Bayar Rp${paymentData?.total_price}`}
       </button>
-      
-      // <div>{paymentData}</div>
       <div>{flutterData}</div>
     </div>
   );
