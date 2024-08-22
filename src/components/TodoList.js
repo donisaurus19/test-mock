@@ -31,6 +31,7 @@ const TodoList = () => {
           setPaymentData(JSON.stringify(result));
           setFlutterInAppWebViewReady(true);
         });
+        window?.flutter_inappwebview?.callHandler('Properties', { height: window?.document?.documentElement?.offsetHeight() });
     });
 
     window.readFromFlutter = function(event) {
@@ -44,6 +45,10 @@ const TodoList = () => {
       });
     };
   }, []);
+
+  useEffect(() => {
+    if(isFlutterInAppWebViewReady) window?.flutter_inappwebview?.callHandler('Properties', {height: window?.document?.documentElement?.offsetHeight()});
+  }, [isVisible])
 
   const toggleTodo = (id) => {
     setTodos(
