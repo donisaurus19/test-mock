@@ -3,7 +3,7 @@ import TodoList from '../components/TodoList';
 
 export default function Home() {
   return (
-    <div className="container mx-auto p-4 rounded-t-lg mt-5">
+    <div className="container mx-auto p-4 rounded-t-lg mt-5 bg-white">
       <Head>
         <title>To-Do List</title>
         <meta name="description" content="A simple to-do list app with Next.js and Tailwind CSS" />
@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="text-2xl font-bold mb-4">Payment Method</h1>
+        <h1 className="text-2xl font-bold mb-4 text-black">Payment Method</h1>
         <TodoList />
       </main>
     </div>

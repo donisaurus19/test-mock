@@ -62,7 +62,7 @@ const TodoList = () => {
     <div id="methodWrapper" className="p-4 flex flex-col">
       <button
         onClick={() => setIsVisible(!isVisible)}
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+        className="mb-4 px-4 py-2 bg-blue-500 rounded"
       >
         {isVisible ? 'Hide' : 'Show'} Method
       </button>
