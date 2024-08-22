@@ -28,7 +28,7 @@ const TodoList = () => {
     window?.addEventListener("flutterInAppWebViewPlatformReady", () => {
       window?.flutter_inappwebview?.callHandler('Submitted')
         .then((result) => {
-          setPaymentData(JSON.stringify(result));
+          setPaymentData(JSON.parse(JSON.stringify(result)));
           setFlutterInAppWebViewReady(true);
         });
       window?.flutter_inappwebview?.callHandler('Properties', `{"height": ${window?.document?.documentElement?.offsetHeight}}`);
