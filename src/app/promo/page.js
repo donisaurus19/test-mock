@@ -41,10 +41,6 @@ const Promo = () => {
     window?.flutter_inappwebview?.callHandler('Properties', '{"isFullScreen": true}');
   }, []);
 
-  useEffect(() => {
-    window?.flutter_inappwebview?.callHandler('Properties', `{"height": ${window?.document?.documentElement?.offsetHeight}}`);
-  }, [isVisible])
-
   const toggleTodo = (id) => {
     setTodos(
       todos.map(todo =>
