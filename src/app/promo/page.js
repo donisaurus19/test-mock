@@ -38,7 +38,7 @@ const Promo = () => {
   // };
   
   useEffect(() => {
-    window?.flutter_inappwebview?.callHandler('Properties', `{"height": null, "isFullScreen": true}`);
+    window?.flutter_inappwebview?.callHandler('Properties', '{"isFullScreen": true}');
   }, []);
 
   useEffect(() => {
