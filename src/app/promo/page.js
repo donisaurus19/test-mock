@@ -36,6 +36,10 @@ const Promo = () => {
   //     )
   //   );
   // };
+  
+  useEffect(() => {
+    window?.flutter_inappwebview?.callHandler('Properties', `{"height": null, "isFullScreen": true}`);
+  }, []);
 
   useEffect(() => {
     window?.flutter_inappwebview?.callHandler('Properties', `{"height": ${window?.document?.documentElement?.offsetHeight}}`);
